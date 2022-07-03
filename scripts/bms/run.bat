@@ -1,0 +1,1 @@
+F:\git\qbms\quickbms.exe -w -D -. -Y -F "*.syn" mbtr.bms F:\Games\Truckrace unpacked

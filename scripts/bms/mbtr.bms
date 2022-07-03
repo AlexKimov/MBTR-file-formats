@@ -1,0 +1,78 @@
+# Game: 
+# Description:
+# 
+# Link:
+
+startfunction EXTRACT fname offset size
+    GoTo offset
+    Get unpack_size long 
+
+    math size -= 4
+    math offset += 4
+    log MEMORY_FILE offset size  # set input buffer
+    log MEMORY_FILE2 0 0  # set output buffer
+    
+    set cycle BYTE 0
+    set current_pos LONG 0
+    set distance LONG 0
+    set n LONG 0
+    set current_pos2 LONG 0
+            
+    math unpack_size -= 1
+    
+    do
+        if cycle == 0 # cycle is 9 bytes: 128, 64, 32, 16, 8, 4, 2, 1, 0
+            GetVarChr flag MEMORY_FILE current_pos byte
+            math current_pos += 1
+            set cycle BYTE 0x80u             
+        endif
+        
+        if cycle & flag # flag > 128..1 copy raw byte
+            GetVarChr tmp MEMORY_FILE current_pos byte    
+            put tmp byte MEMORY_FILE2
+            math current_pos += 1
+            math current_pos2 += 1
+        else 
+            # two control bytes - sliding window 
+            # 4 bits for length and 12 bits for distance to bytes
+            GetVarChr tmp MEMORY_FILE current_pos byte  # get first byte          
+            xmath length "(tmp & 0xF) + 3" # length - number of bytes to copy
+            
+            xmath n "current_pos + 1"            
+            GetVarChr tmp2 MEMORY_FILE n byte # get second byte            
+            xmath distance "current_pos2 - (tmp2 | (16 * (tmp & 0xF0)))"
+            xmath distance2 "tmp2 | (16 * (tmp & 0xF0))"           
+            # distance - offset to bytes in output buffer 
+                           
+            set dst LONG distance
+                
+            for k = 0 < length                  
+                GetVarChr tmp MEMORY_FILE2 dst byte                
+                put tmp byte MEMORY_FILE2                                   
+                math dst += 1       
+                math current_pos2 += 1
+            next k   
+            
+            math current_pos += 2            
+        endif
+            
+        math cycle >>= 1 # next cycle
+    while current_pos2 < unpack_size
+    
+    log fname 0 unpack_size MEMORY_FILE2 
+endfunction
+
+IDSTRING "FNYS"
+get files LONG
+goto 8 0 SEEK_CUR
+
+For i = 0 < files 
+    getdstring fname 24   
+    get offset LONG
+    get size LONG   
+ 
+    print "%fname%" 
+    SavePos offset2
+    CallFunction EXTRACT fname offset size  
+    GoTo offset2
+next i
