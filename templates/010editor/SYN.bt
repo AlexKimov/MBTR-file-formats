@@ -25,8 +25,10 @@ struct {
 
 struct {
   for (i = 0; i < Count; ++i) {
+    FSeek(FILE_ENTRY[i].Offset);
     struct {
-      BYTE Data[FILE_ENTRY[i].Size];
+      UINT Size;
+      BYTE Data[FILE_ENTRY[i].Size - 4];
     } FILE;
   };
 } FILES;
