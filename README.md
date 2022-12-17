@@ -7,7 +7,7 @@ File formats and tools for Mercedes Benz Truck Racing (2000).
 |  **1**  | SYN |  [SYN.bt](https://github.com/AlexKimov/MBTR-file-formats/blob/master/templates/010editor/SYN.bt) |  | resource archives (compressed)
 |  **2**  | OIF |  [OIF.bt](https://github.com/AlexKimov/MBTR-file-formats/blob/master/templates/010editor/OIF.bt) |  | 3d models
 
-## Scripts
+## Tools
 
 #### QuickBMS 
 
@@ -15,4 +15,9 @@ File formats and tools for Mercedes Benz Truck Racing (2000).
 | :-- | :------- | :-------  | :-- |
 |  **1**  | [run.bat](https://github.com/AlexKimov/MBTR-file-formats/blob/master/scripts/bms/run.bat) | [mbtr.bms](https://github.com/AlexKimov/MBTR-file-formats/blob/master/scripts/bms/mbtr.bms)  | unpack *.syn archives |
 
+#### Noesis
+
+| № | Plugin | Description   |
+| :-- | :------- | :-------  | :-- |
+|  **1**  | [fmt_mbtr_syn.py](https://github.com/AlexKimov/MBTR-file-formats/blob/master/plugins/noesis/fmt_mbtr_syn.py)  | unpack *.syn archives |
 
