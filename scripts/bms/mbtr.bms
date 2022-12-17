@@ -18,7 +18,7 @@ startfunction EXTRACT fname offset size
     set n LONG 0
     set current_pos2 LONG 0
             
-    math unpack_size -= 1
+    math unpack_size -= 4 
     
     do
         if cycle == 0 # cycle is 9 bytes: 128, 64, 32, 16, 8, 4, 2, 1, 0
@@ -56,7 +56,7 @@ startfunction EXTRACT fname offset size
             math current_pos += 2            
         endif
             
-        math cycle >>= 1 # next cycle
+        math cycle >>= 1 # next step
     while current_pos2 < unpack_size
     
     log fname 0 unpack_size MEMORY_FILE2 
