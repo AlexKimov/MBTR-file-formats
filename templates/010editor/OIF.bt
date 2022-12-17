@@ -11,3 +11,82 @@
 //   History: 
 //------------------------------------------------
 
+
+local float kUVConvertConst = 0.000244140625;
+local uint texCount, vertexCount, polyCount;
+
+LittleEndian();
+
+CHAR Magic[4];
+UINT Size;
+
+FSkip(4);
+
+BigEndian();
+
+while (!FEof())
+{
+  struct {  
+    CHAR FOURCC[4];
+    if (FOURCC == "HEAD")
+    {
+      UINT Size;
+      UINT16 FlagThree; // 3
+
+      UINT16 VertexCount;
+      vertexCount = VertexCount;
+
+      UINT16 PolyCount;
+      polyCount = PolyCount;
+
+      UINT16 TexCount;
+      texCount = TexCount;    
+    } else if (FOURCC == "VRTX")
+    {
+  
+      UINT Size;
+      struct {
+        FLOAT Unknown;
+        FLOAT X; 
+        FLOAT Y;
+        FLOAT Z;
+      } VERTEX[vertexCount]; 
+    } else if (FOURCC == "POLY")
+    {
+      UINT Size;
+      struct {
+        UINT16 Un;
+        UINT16 VertNumber;
+        UINT16 Un;
+        UINT16 TextureIndex;
+        UINT16 Un;
+        UINT16 Un;
+        UINT Un;
+
+        struct {
+          UINT16 Index;
+          UINT16 U <comment=getUVValue>;
+          UINT16 V <comment=getUVValue>;
+        } POLY_VERTEX[VertNumber];
+
+        BYTE Data[72 - VertNumber*6];
+      } POLYGON[polyCount];
+
+    } else if (FOURCC == "TXPG")
+    {
+   
+      UINT Size;
+      struct { 
+        CHAR Name[32];
+      } TEXTURE[texCount];
+    }
+  } SECTION;
+};
+
+string getUVValue(uint16 numb)
+{
+  string str;
+  
+  SPrintf(str, "%f", numb * kUVConvertConst);
+  return str;
+}
