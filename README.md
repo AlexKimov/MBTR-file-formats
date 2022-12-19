@@ -28,7 +28,7 @@ File formats and tools for Mercedes Benz Truck Racing (2000).
 | :-- | :------- | :-------  | 
 |  **1**  | [fmt_mbtr_syn.py](https://github.com/AlexKimov/MBTR-file-formats/blob/master/plugins/noesis/fmt_mbtr_syn.py)  | unpack *.syn archives |
 
-    1. Get latest Noesis version.
+    1. Get latest Noesis version, link is below images https://richwhitehouse.com/index.php?content=inc_projects.php&showproject=91 .
     2. Put file to PathToNoesis/plugins/python.
     3. Open Noesis. 
     4, Open .syn archive.
