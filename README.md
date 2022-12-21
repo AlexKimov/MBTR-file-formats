@@ -21,3 +21,4 @@ File formats and tools for Mercedes Benz Truck Racing (2000).
 | :-- | :------- | :-------  | :-- |
 |  **1**  | [fmt_mbtr_syn.py](https://github.com/AlexKimov/MBTR-file-formats/blob/master/plugins/noesis/fmt_mbtr_syn.py)  | unpack *.syn archives |
 
+![Truck!!](truck.gif)
