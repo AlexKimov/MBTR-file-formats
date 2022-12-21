@@ -43,4 +43,4 @@ File formats and tools for Mercedes Benz Truck Racing (2000).
 |  **1**  | SYN |  [SYN.bt](https://github.com/AlexKimov/MBTR-file-formats/blob/master/templates/010editor/SYN.bt) |  сжатый архив игры |
 |  **2**  | OIF |  [OIF.bt](https://github.com/AlexKimov/MBTR-file-formats/blob/master/templates/010editor/OIF.bt) |  3d модели |
 
-![Truck!!](truck.gif)
+![Truck!!](truck.tga)
